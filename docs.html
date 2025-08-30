@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Chronik Stream</title>
+    <meta name="description" content="Complete documentation for Chronik Stream - Kafka-compatible streaming platform">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/docs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none;">
+                        <span class="logo-text">Chronik Stream</span>
+                    </a>
+                    <span class="version-badge">v0.5.0</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#configuration">Configuration</a></li>
+                    <li><a href="#apis">APIs</a></li>
+                    <li><a href="https://github.com/lspecian/chronik-stream" target="_blank" class="github-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Documentation Layout -->
+    <div class="docs-container">
+        <!-- Sidebar -->
+        <aside class="docs-sidebar">
+            <div class="sidebar-content">
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#quickstart">Quick Start</a></li>
+                    <li><a href="#docker">Docker Setup</a></li>
+                    <li><a href="#building">Building from Source</a></li>
+                </ul>
+
+                <h3>Configuration</h3>
+                <ul>
+                    <li><a href="#configuration">Basic Configuration</a></li>
+                    <li><a href="#storage">Storage Backends</a></li>
+                    <li><a href="#security">Security</a></li>
+                    <li><a href="#monitoring">Monitoring</a></li>
+                </ul>
+
+                <h3>Kafka APIs</h3>
+                <ul>
+                    <li><a href="#apis">Supported APIs</a></li>
+                    <li><a href="#produce">Produce API</a></li>
+                    <li><a href="#fetch">Fetch API</a></li>
+                    <li><a href="#consumer-groups">Consumer Groups</a></li>
+                </ul>
+
+                <h3>Client Libraries</h3>
+                <ul>
+                    <li><a href="#python">Python Client</a></li>
+                    <li><a href="#java">Java Client</a></li>
+                    <li><a href="#go">Go Client</a></li>
+                    <li><a href="#nodejs">Node.js Client</a></li>
+                </ul>
+
+                <h3>Operations</h3>
+                <ul>
+                    <li><a href="#deployment">Deployment</a></li>
+                    <li><a href="#scaling">Scaling</a></li>
+                    <li><a href="#backup">Backup & Recovery</a></li>
+                    <li><a href="#troubleshooting">Troubleshooting</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="docs-main">
+            <section id="installation" class="docs-section">
+                <h1>Installation</h1>
+                <p>Chronik Stream can be installed using Docker, pre-built binaries, or compiled from source.</p>
+
+                <h2>System Requirements</h2>
+                <ul>
+                    <li>Linux, macOS, or Windows (via WSL2)</li>
+                    <li>x86_64 or ARM64 architecture</li>
+                    <li>Minimum 2GB RAM (4GB recommended)</li>
+                    <li>10GB free disk space</li>
+                </ul>
+
+                <h2>Docker Installation</h2>
+                <pre><code># Pull the latest image
+docker pull ghcr.io/lspecian/chronik-stream:latest
+
+# Run with default settings
+docker run -d -p 9092:9092 ghcr.io/lspecian/chronik-stream:latest
+
+# Run with persistent storage
+docker run -d \
+  --name chronik \
+  -p 9092:9092 \
+  -v chronik-data:/data \
+  ghcr.io/lspecian/chronik-stream:latest</code></pre>
+
+                <h2>Binary Installation</h2>
+                <pre><code># Linux x86_64
+curl -L https://github.com/lspecian/chronik-stream/releases/download/v0.5.0/chronik-server-linux-amd64.tar.gz | tar xz
+./chronik-server standalone
+
+# macOS Apple Silicon
+curl -L https://github.com/lspecian/chronik-stream/releases/download/v0.5.0/chronik-server-darwin-arm64.tar.gz | tar xz
+./chronik-server standalone</code></pre>
+            </section>
+
+            <section id="quickstart" class="docs-section">
+                <h1>Quick Start Guide</h1>
+                <p>Get Chronik Stream up and running in minutes.</p>
+
+                <h2>1. Start the Server</h2>
+                <pre><code>docker run -d -p 9092:9092 ghcr.io/lspecian/chronik-stream:latest</code></pre>
+
+                <h2>2. Create a Topic</h2>
+                <pre><code>from kafka.admin import KafkaAdminClient, NewTopic
+
+admin = KafkaAdminClient(
+    bootstrap_servers='localhost:9092',
+    api_version=(0, 10, 0)
+)
+
+topic = NewTopic(name='my-topic', num_partitions=3, replication_factor=1)
+admin.create_topics([topic])</code></pre>
+
+                <h2>3. Produce Messages</h2>
+                <pre><code>from kafka import KafkaProducer
+
+producer = KafkaProducer(
+    bootstrap_servers='localhost:9092',
+    api_version=(0, 10, 0)
+)
+
+producer.send('my-topic', b'Hello Chronik!')
+producer.flush()</code></pre>
+
+                <h2>4. Consume Messages</h2>
+                <pre><code>from kafka import KafkaConsumer
+
+consumer = KafkaConsumer(
+    'my-topic',
+    bootstrap_servers='localhost:9092',
+    api_version=(0, 10, 0),
+    auto_offset_reset='earliest'
+)
+
+for message in consumer:
+    print(f"Received: {message.value.decode()}")</code></pre>
+            </section>
+
+            <section id="docker" class="docs-section">
+                <h1>Docker Setup</h1>
+                
+                <h2>Docker Compose</h2>
+                <p>For production deployments, use Docker Compose:</p>
+                <pre><code>version: '3.8'
+
+services:
+  chronik:
+    image: ghcr.io/lspecian/chronik-stream:latest
+    ports:
+      - "9092:9092"
+      - "3000:3000"  # Admin API
+    volumes:
+      - chronik-data:/data
+    environment:
+      - RUST_LOG=info
+      - STORAGE_BACKEND=local
+      - LOCAL_STORAGE_PATH=/data/segments
+    restart: unless-stopped
+
+volumes:
+  chronik-data:</code></pre>
+
+                <h2>Environment Variables</h2>
+                <table class="docs-table">
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>RUST_LOG</code></td>
+                            <td>Log level (debug, info, warn, error)</td>
+                            <td>info</td>
+                        </tr>
+                        <tr>
+                            <td><code>CHRONIK_DATA_DIR</code></td>
+                            <td>Data directory path</td>
+                            <td>/data</td>
+                        </tr>
+                        <tr>
+                            <td><code>CHRONIK_BIND_ADDR</code></td>
+                            <td>Bind address</td>
+                            <td>0.0.0.0:9092</td>
+                        </tr>
+                        <tr>
+                            <td><code>STORAGE_BACKEND</code></td>
+                            <td>Storage type (local, s3, gcs, azure)</td>
+                            <td>local</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="configuration" class="docs-section">
+                <h1>Configuration</h1>
+                
+                <h2>Command Line Options</h2>
+                <pre><code>chronik-server [OPTIONS] [COMMAND]
+
+Commands:
+  standalone  Run as standalone Kafka-compatible server (default)
+  all         Run all components in a single process
+  ingest      Run as ingest node
+  search      Run as search node
+
+Options:
+  -p, --kafka-port &lt;PORT&gt;    Kafka protocol port (default: 9092)
+  -a, --admin-port &lt;PORT&gt;    Admin API port (default: 3000)
+  -d, --data-dir &lt;PATH&gt;      Data directory (default: ./data)
+  -b, --bind-addr &lt;ADDR&gt;     Bind address (default: 0.0.0.0)
+  --enable-search             Enable search functionality
+  --enable-backup             Enable backup functionality
+  --log-level &lt;LEVEL&gt;        Log level: debug, info, warn, error
+  --help                      Print help
+  --version                   Print version</code></pre>
+
+                <h2>Configuration File</h2>
+                <p>Create a <code>chronik.toml</code> configuration file:</p>
+                <pre><code>[server]
+bind_addr = "0.0.0.0:9092"
+admin_port = 3000
+data_dir = "/data"
+
+[storage]
+backend = "s3"
+compression = "snappy"
+
+[storage.s3]
+bucket = "my-chronik-bucket"
+region = "us-east-1"
+prefix = "chronik/"
+
+[security]
+enable_sasl = true
+sasl_mechanisms = ["PLAIN", "SCRAM-SHA-256"]
+
+[monitoring]
+metrics_port = 9090
+enable_tracing = true</code></pre>
+            </section>
+
+            <section id="apis" class="docs-section">
+                <h1>Kafka API Compatibility</h1>
+                <p>Chronik Stream implements the complete Kafka wire protocol, supporting all 19 core APIs.</p>
+
+                <h2>Supported APIs</h2>
+                <table class="docs-table">
+                    <thead>
+                        <tr>
+                            <th>API</th>
+                            <th>Versions</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Produce</td>
+                            <td>v0-v9</td>
+                            <td><span class="badge success">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fetch</td>
+                            <td>v0-v13</td>
+                            <td><span class="badge success">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td>ListOffsets</td>
+                            <td>v0-v7</td>
+                            <td><span class="badge success">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td>Metadata</td>
+                            <td>v0-v12</td>
+                            <td><span class="badge success">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td>OffsetCommit</td>
+                            <td>v0-v8</td>
+                            <td><span class="badge success">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td>OffsetFetch</td>
+                            <td>v0-v8</td>
+                            <td><span class="badge success">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td>FindCoordinator</td>
+                            <td>v0-v4</td>
+                            <td><span class="badge success">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td>JoinGroup</td>
+                            <td>v0-v9</td>
+                            <td><span class="badge success">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td>Heartbeat</td>
+                            <td>v0-v4</td>
+                            <td><span class="badge success">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td>LeaveGroup</td>
+                            <td>v0-v5</td>
+                            <td><span class="badge success">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td>SyncGroup</td>
+                            <td>v0-v5</td>
+                            <td><span class="badge success">Complete</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="python" class="docs-section">
+                <h1>Python Client</h1>
+                
+                <h2>Installation</h2>
+                <pre><code>pip install kafka-python
+# or
+pip install confluent-kafka</code></pre>
+
+                <h2>Producer Example</h2>
+                <pre><code>from kafka import KafkaProducer
+import json
+
+producer = KafkaProducer(
+    bootstrap_servers='localhost:9092',
+    api_version=(0, 10, 0),  # Important for compatibility
+    value_serializer=lambda v: json.dumps(v).encode('utf-8')
+)
+
+# Send a message
+future = producer.send('events', {'user': 'alice', 'action': 'login'})
+result = future.get(timeout=10)
+print(f"Message sent to {result.topic}:{result.partition} at offset {result.offset}")
+
+# Batch send
+for i in range(100):
+    producer.send('events', {'event_id': i, 'data': f'event_{i}'})
+producer.flush()</code></pre>
+
+                <h2>Consumer Example</h2>
+                <pre><code>from kafka import KafkaConsumer
+import json
+
+consumer = KafkaConsumer(
+    'events',
+    bootstrap_servers='localhost:9092',
+    api_version=(0, 10, 0),
+    auto_offset_reset='earliest',
+    group_id='my-group',
+    value_deserializer=lambda m: json.loads(m.decode('utf-8'))
+)
+
+for message in consumer:
+    print(f"Received: {message.value} from {message.topic}:{message.partition}:{message.offset}")</code></pre>
+
+                <h2>Admin Operations</h2>
+                <pre><code>from kafka.admin import KafkaAdminClient, NewTopic, ConfigResource, ConfigResourceType
+
+admin = KafkaAdminClient(
+    bootstrap_servers='localhost:9092',
+    api_version=(0, 10, 0)
+)
+
+# Create topics
+topics = [
+    NewTopic(name='user-events', num_partitions=6, replication_factor=1),
+    NewTopic(name='system-logs', num_partitions=3, replication_factor=1)
+]
+admin.create_topics(topics)
+
+# List topics
+metadata = admin.list_topics()
+print(f"Topics: {metadata}")
+
+# Delete topics
+admin.delete_topics(['old-topic'])</code></pre>
+            </section>
+
+            <section id="troubleshooting" class="docs-section">
+                <h1>Troubleshooting</h1>
+                
+                <h2>Common Issues</h2>
+                
+                <div class="troubleshoot-item">
+                    <h3>Connection Refused</h3>
+                    <p><strong>Problem:</strong> Client cannot connect to Chronik</p>
+                    <p><strong>Solution:</strong></p>
+                    <ul>
+                        <li>Check if Chronik is running: <code>docker ps</code></li>
+                        <li>Verify port binding: <code>netstat -an | grep 9092</code></li>
+                        <li>Check firewall rules</li>
+                        <li>Ensure correct bootstrap servers configuration</li>
+                    </ul>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h3>API Version Mismatch</h3>
+                    <p><strong>Problem:</strong> Python client fails with version errors</p>
+                    <p><strong>Solution:</strong></p>
+                    <pre><code># Always specify API version for Python clients
+producer = KafkaProducer(
+    bootstrap_servers='localhost:9092',
+    api_version=(0, 10, 0)  # Required!
+)</code></pre>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h3>High CPU Usage</h3>
+                    <p><strong>Problem:</strong> Chronik using too much CPU</p>
+                    <p><strong>Solution:</strong></p>
+                    <ul>
+                        <li>Update to v0.5.0+ (0% idle CPU usage)</li>
+                        <li>Check log level (debug mode uses more CPU)</li>
+                        <li>Monitor message throughput</li>
+                    </ul>
+                </div>
+
+                <h2>Debug Logging</h2>
+                <pre><code># Enable debug logging
+export RUST_LOG=debug
+./chronik-server standalone
+
+# Or with Docker
+docker run -e RUST_LOG=debug -p 9092:9092 ghcr.io/lspecian/chronik-stream:latest</code></pre>
+
+                <h2>Getting Help</h2>
+                <ul>
+                    <li><a href="https://github.com/lspecian/chronik-stream/issues" target="_blank">GitHub Issues</a></li>
+                    <li><a href="https://github.com/lspecian/chronik-stream/discussions" target="_blank">GitHub Discussions</a></li>
+                    <li>Check the <a href="https://github.com/lspecian/chronik-stream/blob/main/README.md" target="_blank">README</a></li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/docs.js"></script>
+</body>
+</html>

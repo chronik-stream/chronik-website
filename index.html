@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronik Stream - High-Performance Kafka-Compatible Streaming Platform</title>
+    <meta name="description" content="A high-performance, Kafka-compatible distributed streaming platform built in Rust. Drop-in replacement for Apache Kafka with enhanced search capabilities.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <span class="logo-text">Chronik Stream</span>
+                    <span class="version-badge">v0.5.0</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#quickstart">Quick Start</a></li>
+                    <li><a href="docs.html">Documentation</a></li>
+                    <li><a href="https://github.com/lspecian/chronik-stream" target="_blank" class="github-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Next-Generation<br>
+                    <span class="gradient-text">Kafka-Compatible</span><br>
+                    Streaming Platform
+                </h1>
+                <p class="hero-subtitle">
+                    Drop-in replacement for Apache Kafka built in Rust. Enhanced with full-text search, 
+                    cloud-native storage, and blazing fast performance.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#quickstart" class="btn btn-primary">Get Started</a>
+                    <a href="https://github.com/lspecian/chronik-stream" target="_blank" class="btn btn-secondary">View on GitHub</a>
+                </div>
+                <div class="hero-code">
+                    <pre><code><span class="comment"># Quick start with Docker</span>
+docker run -d -p 9092:9092 ghcr.io/lspecian/chronik-stream:v0.5.0
+
+<span class="comment"># Use with any Kafka client</span>
+producer = KafkaProducer(bootstrap_servers='localhost:9092')
+producer.send('my-topic', b'Hello Chronik!')</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">0%</div>
+                    <div class="stat-label">Idle CPU Usage</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">Messages/Second</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">&lt;10ms</div>
+                    <div class="stat-label">P99 Latency</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">19/19</div>
+                    <div class="stat-label">Kafka APIs</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Chronik Stream?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>100% Kafka Compatible</h3>
+                    <p>Complete wire protocol compatibility with all 19 core Kafka APIs. Works with all standard Kafka clients out of the box.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Built-in Search</h3>
+                    <p>Full-text search on message content powered by Tantivy search engine. Query your streams like never before.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h3>Cloud-Native Storage</h3>
+                    <p>Pluggable object storage backends including S3, GCS, Azure Blob, and local storage. Scale infinitely.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Blazing Fast</h3>
+                    <p>Built in Rust with zero-copy networking. Optimized for low latency with 0% idle CPU usage.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏗️</div>
+                    <h3>Multi-Architecture</h3>
+                    <p>Native support for x86_64 and ARM64. Run on Apple Silicon, AWS Graviton, or any modern hardware.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Observable</h3>
+                    <p>Built-in Prometheus metrics and OpenTelemetry tracing. Monitor every aspect of your streaming platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="architecture">
+        <div class="container">
+            <h2 class="section-title">Simple Yet Powerful Architecture</h2>
+            <div class="arch-diagram">
+                <div class="arch-flow">
+                    <div class="arch-box">
+                        <div class="arch-title">Kafka Clients</div>
+                        <div class="arch-desc">Java, Python, Go, Node.js</div>
+                    </div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-box primary">
+                        <div class="arch-title">Chronik Stream</div>
+                        <div class="arch-components">
+                            <div>Protocol Handler (9092)</div>
+                            <div>Metadata Store</div>
+                            <div>Search Engine</div>
+                            <div>Storage Manager</div>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-box">
+                        <div class="arch-title">Object Storage</div>
+                        <div class="arch-desc">S3, GCS, Azure, Local</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section id="quickstart" class="quickstart">
+        <div class="container">
+            <h2 class="section-title">Get Started in Seconds</h2>
+            <div class="quickstart-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="docker">Docker</button>
+                    <button class="tab-btn" data-tab="binary">Binary</button>
+                    <button class="tab-btn" data-tab="source">From Source</button>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="docker">
+                        <pre><code><span class="comment"># Quick start - single command</span>
+docker run -d -p 9092:9092 ghcr.io/lspecian/chronik-stream:v0.5.0
+
+<span class="comment"># With persistent storage</span>
+docker run -d --name chronik \
+  -p 9092:9092 \
+  -v chronik-data:/data \
+  ghcr.io/lspecian/chronik-stream:v0.5.0
+
+<span class="comment"># Using docker-compose</span>
+curl -O https://raw.githubusercontent.com/lspecian/chronik-stream/main/docker-compose.yml
+docker-compose up -d</code></pre>
+                    </div>
+                    <div class="tab-pane" id="binary">
+                        <pre><code><span class="comment"># Download latest release (Linux x86_64)</span>
+curl -L https://github.com/lspecian/chronik-stream/releases/download/v0.5.0/chronik-server-linux-amd64.tar.gz \
+  -o chronik-server.tar.gz
+tar xzf chronik-server.tar.gz
+./chronik-server standalone
+
+<span class="comment"># macOS (Apple Silicon)</span>
+curl -L https://github.com/lspecian/chronik-stream/releases/download/v0.5.0/chronik-server-darwin-arm64.tar.gz \
+  -o chronik-server.tar.gz
+tar xzf chronik-server.tar.gz
+./chronik-server standalone</code></pre>
+                    </div>
+                    <div class="tab-pane" id="source">
+                        <pre><code><span class="comment"># Clone repository</span>
+git clone https://github.com/lspecian/chronik-stream.git
+cd chronik-stream
+
+<span class="comment"># Build release binary</span>
+cargo build --release --bin chronik-server
+
+<span class="comment"># Run</span>
+./target/release/chronik-server standalone</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compatibility Section -->
+    <section class="compatibility">
+        <div class="container">
+            <h2 class="section-title">Works With Your Existing Stack</h2>
+            <div class="clients-grid">
+                <div class="client-card">
+                    <h4>Python</h4>
+                    <pre><code>from kafka import KafkaProducer
+producer = KafkaProducer(
+    bootstrap_servers='localhost:9092',
+    api_version=(0, 10, 0)
+)</code></pre>
+                </div>
+                <div class="client-card">
+                    <h4>Java</h4>
+                    <pre><code>Properties props = new Properties();
+props.put("bootstrap.servers", "localhost:9092");
+KafkaProducer producer = 
+  new KafkaProducer(props);</code></pre>
+                </div>
+                <div class="client-card">
+                    <h4>Go</h4>
+                    <pre><code>config := sarama.NewConfig()
+producer, err := sarama.NewSyncProducer(
+  []string{"localhost:9092"}, config
+)</code></pre>
+                </div>
+                <div class="client-card">
+                    <h4>Node.js</h4>
+                    <pre><code>const kafka = new Kafka({
+  brokers: ['localhost:9092']
+});
+const producer = kafka.producer();</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Stream?</h2>
+                <p>Join the next generation of streaming platforms</p>
+                <div class="cta-buttons">
+                    <a href="#quickstart" class="btn btn-primary">Get Started</a>
+                    <a href="https://github.com/lspecian/chronik-stream" target="_blank" class="btn btn-outline">Star on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Chronik Stream</h4>
+                    <p>High-performance Kafka-compatible streaming platform built in Rust</p>
+                    <div class="footer-badges">
+                        <img src="https://img.shields.io/github/v/release/lspecian/chronik-stream" alt="Release">
+                        <img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" alt="License">
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="docs.html">Documentation</a></li>
+                        <li><a href="https://github.com/lspecian/chronik-stream" target="_blank">GitHub</a></li>
+                        <li><a href="https://github.com/lspecian/chronik-stream/releases" target="_blank">Releases</a></li>
+                        <li><a href="https://github.com/lspecian/chronik-stream/issues" target="_blank">Issues</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/lspecian/chronik-stream/blob/main/README.md" target="_blank">Getting Started</a></li>
+                        <li><a href="https://github.com/lspecian/chronik-stream/blob/main/docker-compose.yml" target="_blank">Docker Compose</a></li>
+                        <li><a href="https://github.com/lspecian/chronik-stream/pkgs/container/chronik-stream" target="_blank">Docker Images</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Chronik Stream. Licensed under Apache 2.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
